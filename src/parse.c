@@ -135,6 +135,7 @@ extern void reset_parser(void)
     parser_state_tos->i_l_follow       = 0;
     parser_state_tos->ind_level        = 0;
     parser_state_tos->last_u_d         = false;
+    parser_state_tos->last_extern_c    = false;
     parser_state_tos->p_l_follow       = 0;
     parser_state_tos->paren_level      = 0;
     parser_state_tos->paren_depth      = 0;
@@ -389,7 +390,11 @@ extern exit_values_ty parse (
             }
             else if (parser_state_tos->p_stack[parser_state_tos->tos] == decl)
             {
-                parser_state_tos->i_l_follow += settings.ind_size;
+                if ((parser_state_tos->last_extern_c == false) ||
+                    (settings.indent_after_extern_c == true))
+                {
+                    parser_state_tos->i_l_follow += settings.ind_size;
+                }
 
                 if ( ( (parser_state_tos->last_rw == rw_struct_like) ||
                        (parser_state_tos->last_rw == rw_enum)) &&

@@ -286,6 +286,8 @@ extern codes_ty lexi(void)
       if (parser_state_tos->last_rw == rw_return)
           parser_state_tos->last_rw = rw_none;
 
+      parser_state_tos->last_extern_c = false;
+
       /* decimal, octal, hex, binary and floating point number format */
       if (isdigit (*buf_ptr) ||
           ((buf_ptr[0] == '.') && isdigit (buf_ptr[1])))
@@ -884,6 +886,12 @@ not_proc:
       }
 
       token_end = buf_ptr;
+      /* check for 'extern "C"' */
+      if ((last_code = decl) && (qchar == '"') &&
+          ((token_end - token) == 3) && (token[1] == 'C'))
+      {
+        parser_state_tos->last_extern_c = true;
+      }
       code = ident;
       break;
 

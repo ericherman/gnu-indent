@@ -331,6 +331,7 @@ typedef struct user_options_st
     int align_with_spaces; /*!< Align with spaces if indenting with tabs. */
     int spaces_around_initializers; /*!< Place spaces after { and before } in initializers. */
     int dont_tab_align_comments; /*!< Don't align comments to the nearest tabstop. */
+    int indent_after_extern_c; /* when true, 'extern "C" {' will cause subsequent code to be indented */
 } user_options_ty;
 
 extern user_options_ty settings;
@@ -451,6 +452,8 @@ typedef struct parser_state
                                    * middle of a stmt */
     int last_u_d;                 /*!<  set to true after scanning a token which
                                    * forces a following operator to be unary */
+    int last_extern_c;            /* set to true if the last thing scanned was
+                                   * 'extern "C"' */
     int p_l_follow;               /*!<  used to remember how to indent following
                                    * statement */
     int paren_level;              /*!<  parenthesization level. used to indent

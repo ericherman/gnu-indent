@@ -223,6 +223,7 @@ static int exp_slc  = 0;
 static int exp_as   = 0;
 static int exp_sar  = 0;
 static int exp_ntac = 0;
+static int exp_iaec = 0;
 
 /**
  * The following structure is controlled by command line parameters and
@@ -391,6 +392,8 @@ const pro_ty pro[] =
     {"as",      PRO_BOOL,                            false,      ON, &settings.align_with_spaces,                &exp_as},
     {"sar",     PRO_BOOL,                            false,      ON, &settings.spaces_around_initializers,       &exp_sar},
     {"ntac",    PRO_BOOL,                            false,      ON, &settings.dont_tab_align_comments,          &exp_ntac},
+    {"niaec",   PRO_BOOL,                            true,      OFF, &settings.indent_after_extern_c,            &exp_iaec},
+    {"iaec",    PRO_BOOL,                           false,       ON, &settings.indent_after_extern_c,            &exp_iaec},
 
     /* Signify end of structure.  */
     {0,         PRO_IGN,                                0, ONOFF_NA, 0,                                          0}
@@ -520,6 +523,8 @@ const pro_ty pro[] =
     {"as",      PRO_BOOL,                            false,      ON, &settings.align_with_spaces,                &exp_as},
     {"sar",     PRO_BOOL,                            false,      ON, &settings.spaces_around_initializers,       &exp_sar},
     {"ntac",    PRO_BOOL,                            false,      ON, &settings.dont_tab_align_comments,          &exp_ntac},
+    {"niaec",   PRO_BOOL,                            true,      OFF, &settings.indent_after_extern_c,            &exp_iaec},
+    {"iaec",    PRO_BOOL,                           false,       ON, &settings.indent_after_extern_c,            &exp_iaec},
 
     /* Signify end of structure.  */
     {0,         PRO_IGN,                                0, ONOFF_NA, 0,                                          0}
@@ -659,6 +664,8 @@ const long_option_conversion_ty option_conversions[] =
     {"align-with-spaces",                           "as"},
     {"spaces-around-initializers",                  "sar"},
     {"dont-tab-align-comments",                     "ntac"},
+    {"dont-indent-after-extern-c",                  "niaec"},
+    {"indent-after-extern-c",                       "iaec"},
 
     /* Signify end of structure.  */
     {0,                                             0},
